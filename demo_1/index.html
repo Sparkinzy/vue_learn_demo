@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>demo1</title>
+	<link href="//cdn.bootcss.com/weui/1.1.0/style/weui.min.css" rel="stylesheet">
+	<script src="//cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+</head>
+<body class="weui-artilce">
+<h2>声明式渲染</h2>
+<div id="app">
+	{{ message }}
+</div>
+<h2> 属性绑定 </h2>
+<div id="app-2">
+	<span v-bind:title="message">
+		Hover your mouse over me for a few seconds to see my dynamically bound title!
+	</span>
+</div>
+<h2>条件与循环</h2>
+<h3>条件</h3>
+<div id="app-3">
+	<p v-if="seen">
+		Now you see me
+	</p>
+</div>
+<h3>循环</h3>
+<div id="app-4">
+	<ol>
+		<li v-for="todo in todos">
+			{{ todo.txt }}
+		</li>
+	</ol>
+</div>
+
+<h2>处理用户输入</h2>
+<div id="app-5">
+	<p>
+		{{message}}
+	</p>
+	<button type="button" class="weui-btn weui-btn_primary" v-on:click="reverseMessage">reverse Message</button>
+</div>
+
+<h2>双向数据绑定</h2>
+<div id="app-6">
+	<p>
+		{{ message }}
+	</p>
+	<input type="text" class="weui-input" v-model="message">
+</div>
+
+
+
+
+
+
+
+
+</body>
+<script type="text/javascript">
+var app = new Vue({
+	el:'#app',
+	data:{
+		message:'hello Vue'
+	}
+});
+
+var app2= new Vue({
+	el :"#app-2",
+	data:{
+		message:'You loaded this page on '+ new Date()
+	}
+});
+
+
+var app3 = new Vue({
+	el:'#app-3',
+	data:{
+		seen:1
+	}
+});
+
+var app4 = new Vue({
+	el:'#app-4',
+	data:{
+		todos:[
+			{ txt:'lear javascript'},
+			{ txt:'learn vue'},
+			{ txt:'Build something awesome'}
+		]
+	}
+});
+
+var app5 = new Vue({
+	el:'#app-5',
+	data:{
+		message:'Hello Vue.js !'
+	},
+	methods:{
+		reverseMessage:function(){
+			this.message = this.message.split('').reverse().join('');
+		}
+	}
+});
+
+var app6 = new Vue({
+	el:"#app-6",
+	data:{
+		message:'hello vue',
+	}
+});
+</script>
+</html>
