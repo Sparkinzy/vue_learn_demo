@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>demo1</title>
+	<link href="http://cdn.bootcss.com/weui/1.1.0/style/weui.min.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+</head>
+<body class="weui-artilce">
+
+
+<!-- 计算属性 -->
+<div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+
+<div id="setter">
+	<!-- v-model 使两个输入与呈现双向绑定，但并不能单纯绑定 -->
+	<!-- 计算属性不能用于双向绑定？ -->
+	<input type="text" v-bind:value="firstName" v-model="firstName">
+	<input type="text" v-bind:value="lastName" v-model="lastName">
+	<p v-bind:title="fullname" >
+		{{ firstName }} {{ lastName}}
+	</p>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var vm = new Vue({
+	el:'#example',
+	data:{
+		message:'hello Vue!'
+	},
+	computed:{
+		reversedMessage:function(){
+			return this.message.split('').reverse().join('');
+		}
+	}
+});
+// 计算属性
+var vm2 = new Vue({
+	el:'#setter',
+	data:{
+		firstName:'Tom',
+		lastName:'Robbin'
+	},
+	computed:{
+		fullname:{
+			get:function(){
+				return this.firstName+' '+this.lastName;
+			},
+			set:function(newValue){
+				console.log(newValue,typeof newValue);
+				var names = newValue.split(' ');
+				this.firstName = names[0];
+				this.lastName = names[names.length-1];
+			}
+		}
+		
+	}
+});
+</script>
+</html>
